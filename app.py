@@ -15,7 +15,7 @@ st.set_page_config(page_title="Galen's Apps", layout="wide")
 st.title("📚 Galen's App Library")
 
 # Create three tabs
-homepage_tab, app_tab1, app_tab2, about_tab = st.tabs(["🏠 Homepage", "🚇 Caltrain Stops", "🧮 My App2",  "ℹ️ About"])
+homepage_tab, app_tab1, app_tab2, app_tab3, about_tab = st.tabs(["🏠 Homepage", "🚇 Caltrain Stops", "⚠️ CA WARN", "🧮 My App3",  "ℹ️ About"])
 
 # --- Homepage Tab ---
 with homepage_tab:
@@ -131,16 +131,44 @@ with app_tab1:
 
 # --- App2 ---
 with app_tab2:
-    st.header("Place holder for app2")
+    st.header("WARN Monitor")
+    
+    # 💡 Paste your existing app logic here
+    st.subheader("CA WARN Notice Viewer")
+
+    warn_df = pd.read_excel('https://edd.ca.gov/siteassets/files/jobs_and_training/warn/warn_report1.xlsx', sheet_name='Detailed WARN Report ')
+    warn_df.columns = warn_df.iloc[0]  # Set the first row as the header
+    warn_df = warn_df[1:]  # Remove the first row from the DataFrame
+    warn_df.reset_index(drop=True, inplace=True)  # Reset the index if needed
+
+    # Input text field for user to enter a name
+    name = st.text_input("Enter company name to filter:")
+
+    # Filter the DataFrame based on user input
+    if name:
+        filtered_df = warn_df[warn_df['Company'].str.contains(name, case=False, na=False)]
+        # = filtered_df['No. Of\nEmployees'].sum()
+        #st.write(f"Total of Number of Employees for filtered companies: {total_number}")
+    else:
+        filtered_df = warn_df.tail()  # Show the full DataFrame if no input
+
+    # Display the filtered DataFrame
+    st.write("Filtered Companies:")
+    st.dataframe(filtered_df)
+
+
+# --- App3 ---
+with app_tab3:
+    st.header("Place holder for app3")
     
     # 💡 Paste your existing app logic here
     st.subheader("Example: BMI Calculator")
 
-    weight2 = st.number_input("Enter your weight (kg):", min_value=1.0, step=0.5, key=3)
-    height2 = st.number_input("Enter your height (cm):", min_value=50.0, step=0.5, key=4)
+    weight3 = st.number_input("Enter your weight (kg):", min_value=1.0, step=0.5, key=5)
+    height3 = st.number_input("Enter your height (cm):", min_value=50.0, step=0.5, key=6)
 
-    if weight2 and height2:
-        bmi = weight2 / ((height2 / 100) ** 2)
+    if weight3 and height3:
+        bmi = weight3 / ((height3 / 100) ** 2)
         st.metric(label="Your BMI", value=round(bmi, 2))
 
 # --- About Tab ---

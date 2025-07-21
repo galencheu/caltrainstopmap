@@ -136,25 +136,25 @@ with app_tab2:
     # 💡 Paste your existing app logic here
     st.subheader("CA WARN Notice Viewer")
 
-    warn_df = pd.read_excel('https://edd.ca.gov/siteassets/files/jobs_and_training/warn/warn_report1.xlsx', sheet_name='Detailed WARN Report ')
-    warn_df.columns = warn_df.iloc[0]  # Set the first row as the header
-    warn_df = warn_df[1:]  # Remove the first row from the DataFrame
-    warn_df.reset_index(drop=True, inplace=True)  # Reset the index if needed
+    # warn_df = pd.read_excel('https://edd.ca.gov/siteassets/files/jobs_and_training/warn/warn_report1.xlsx', sheet_name='Detailed WARN Report ')
+    # warn_df.columns = warn_df.iloc[0]  # Set the first row as the header
+    # warn_df = warn_df[1:]  # Remove the first row from the DataFrame
+    # warn_df.reset_index(drop=True, inplace=True)  # Reset the index if needed
 
-    # Input text field for user to enter a name
-    name = st.text_input("Enter company name to filter:")
+    # # Input text field for user to enter a name
+    # name = st.text_input("Enter company name to filter:")
 
-    # Filter the DataFrame based on user input
-    if name:
-        filtered_df = warn_df[warn_df['Company'].str.contains(name, case=False, na=False)]
-        # = filtered_df['No. Of\nEmployees'].sum()
-        #st.write(f"Total of Number of Employees for filtered companies: {total_number}")
-    else:
-        filtered_df = warn_df.tail()  # Show the full DataFrame if no input
+    # # Filter the DataFrame based on user input
+    # if name:
+    #     filtered_df = warn_df[warn_df['Company'].str.contains(name, case=False, na=False)]
+    #     # = filtered_df['No. Of\nEmployees'].sum()
+    #     #st.write(f"Total of Number of Employees for filtered companies: {total_number}")
+    # else:
+    #     filtered_df = warn_df.tail()  # Show the full DataFrame if no input
 
-    # Display the filtered DataFrame
-    st.write("Filtered Companies:")
-    st.dataframe(filtered_df)
+    # # Display the filtered DataFrame
+    # st.write("Filtered Companies:")
+    # st.dataframe(filtered_df)
 
 
 # --- App3 ---
